@@ -100,4 +100,12 @@ Page({
     util.http(nextUrl, this.callback)
     wx.showNavigationBarLoading()
   },
+
+  onMovieTap: function (event) {
+    var movieId = event.currentTarget.dataset.movieid
+    var navTitle = event.currentTarget.dataset.movietitle
+    wx.navigateTo({
+      url: '../movie-detail/movie-detail?id=' + movieId + '&navTitle=' + navTitle,
+    })
+  },
 })

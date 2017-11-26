@@ -7,20 +7,32 @@ var app = getApp()
 Page({
 
   data: {
+    navigateTitle: "",
     movie: {}
   },
 
   onLoad: function (options) {
+    var navTitle = options.navTitle
+    this.setData({
+      navigateTitle: navTitle
+    })
+
     var movieId = options.id
     var url = app.globalData.doubanBase + "/v2/movie/subject/" + movieId
     util.http(url, this.processDoubanData)
   },
 
-  processDoubanData: function(data) {
+  onReady: function() {
+    wx.setNavigationBarTitle({
+      title: this.data.navigateTitle,
+    })
+  },
+
+  processDoubanData: function (data) {
     if (!data) {
       return
     }
-    
+
     var director = {
       avatar: "",
       name: "",
@@ -59,7 +71,7 @@ Page({
     })
   },
 
-  viewMoviePostImg: function(event) {
+  viewMoviePostImg: function (event) {
     var src = event.currentTarget.dataset.src
     wx.previewImage({
       urls: [src],

@@ -27,7 +27,7 @@ Page({
     wx.request({
       url: url,
       header: {
-        'Content-Type': 'application/xml' // bug
+        'Content-Type': 'application/xml', // bug
       },
       method: 'GET',
       success: function (res) {
@@ -48,13 +48,14 @@ Page({
 
   onMovieTap: function(event) {
     var movieId = event.currentTarget.dataset.movieid
+    var navTitle = event.currentTarget.dataset.movietitle
     wx.navigateTo({
-      url: 'movie-detail/movie-detail?id=' + movieId,
+      url: 'movie-detail/movie-detail?id=' + movieId + '&navTitle=' + navTitle,
     })
   },
 
   processDoubanData: function (moviesDouban, settedKey, categoryTitle) {
-    // console.log(moviesDouban)
+    console.log(moviesDouban)
     var movies = []
     for (var idx in moviesDouban.subjects) {
       var subject = moviesDouban.subjects[idx]
